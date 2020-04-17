@@ -34,7 +34,7 @@ export class IdeaController {
   }
 
   @Patch(':id')
-  updateIda(@Param('id') id: string, @Body() data: Partial<IdeaDTO>) {
+  updateIda(@Param('id') id: string, @Body() data: IdeaDTO) {
     this.logger.log(`Request data : ${JSON.stringify(data)}`);
     return this.ideaService.update(id, data);
   }

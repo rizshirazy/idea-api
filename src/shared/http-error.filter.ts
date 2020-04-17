@@ -16,7 +16,7 @@ export class HttpErrorFilter implements ExceptionFilter {
 
     const errorResponse = {
       code: status,
-      timestamp: new Date().toLocaleDateString(),
+      timestamp: new Date().toLocaleString(),
       path: request.url,
       method: request.method,
       message: exception.message,

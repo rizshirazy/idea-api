@@ -33,7 +33,7 @@ export class IdeaService {
     return idea;
   }
 
-  async update(id: string, data: Partial<IdeaDTO>) {
+  async update(id: string, data: IdeaDTO) {
     await this.read(id);
     await this.ideaRepository.update({ id }, data);
     return this.ideaRepository.findOne({ id });
