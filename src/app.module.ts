@@ -8,6 +8,7 @@ import { IdeaModule } from './idea/idea.module';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
 import { ValidationPipe } from './shared/validation.pipe';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ValidationPipe } from './shared/validation.pipe';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     IdeaModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [
