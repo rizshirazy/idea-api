@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  Logger,
 } from '@nestjs/common';
 
 import { IdeaService } from './idea.service';
@@ -13,6 +14,7 @@ import { IdeaDTO } from './idea.dto';
 
 @Controller('idea')
 export class IdeaController {
+  private logger = new Logger(IdeaController.name);
   constructor(private readonly ideaService: IdeaService) {}
 
   @Get()
@@ -22,6 +24,7 @@ export class IdeaController {
 
   @Post()
   createIdea(@Body() data: IdeaDTO) {
+    this.logger.log(`Request data : ${JSON.stringify(data)}`);
     return this.ideaService.create(data);
   }
 
@@ -32,6 +35,7 @@ export class IdeaController {
 
   @Patch(':id')
   updateIda(@Param('id') id: string, @Body() data: Partial<IdeaDTO>) {
+    this.logger.log(`Request data : ${JSON.stringify(data)}`);
     return this.ideaService.update(id, data);
   }
 

@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { IdeaModule } from './idea/idea.module';
 import { HttpErrorFilter } from './shared/http-error.filter';
 import { LoggingInterceptor } from './shared/logging.interceptor';
+import { ValidationPipe } from './shared/validation.pipe';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       synchronize: true,
-      logging: true,
+      logging: ['error'],
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     IdeaModule,
@@ -28,6 +29,7 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
     AppService,
     { provide: APP_FILTER, useClass: HttpErrorFilter },
     { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor },
+    { provide: APP_PIPE, useClass: ValidationPipe },
   ],
 })
 export class AppModule {}
