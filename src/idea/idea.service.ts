@@ -61,7 +61,7 @@ export class IdeaService {
 
   async showAll(): Promise<IIdeaResponseObject[]> {
     const ideas = await this.ideaRepository.find({
-      relations: ['author', 'upvotes', 'downvotes'],
+      relations: ['author', 'upvotes', 'downvotes', 'comments'],
     });
     return ideas.map(idea => this.toResponseObject(idea));
   }
@@ -78,7 +78,7 @@ export class IdeaService {
     try {
       idea = await this.ideaRepository.findOne({
         where: { id },
-        relations: ['author', 'upvotes', 'downvotes'],
+        relations: ['author', 'upvotes', 'downvotes', 'comments'],
       });
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -114,7 +114,7 @@ export class IdeaService {
   async upvote(id: string, userId: string) {
     let idea = await this.ideaRepository.findOne({
       where: { id },
-      relations: ['author', 'upvotes', 'downvotes'],
+      relations: ['author', 'upvotes', 'downvotes', 'comments'],
     });
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
@@ -125,7 +125,7 @@ export class IdeaService {
   async downvote(id: string, userId: string) {
     let idea = await this.ideaRepository.findOne({
       where: { id },
-      relations: ['author', 'upvotes', 'downvotes'],
+      relations: ['author', 'upvotes', 'downvotes', 'comments'],
     });
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
