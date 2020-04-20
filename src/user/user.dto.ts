@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { IdeaEnity } from 'src/idea/idea.entity';
 
 export class UserDTO {
   @IsNotEmpty()
@@ -16,4 +17,5 @@ export interface IUserResponseObject {
   username: string;
   createdDate: Date;
   token?: string;
+  bookmarks?: IdeaEnity[];
 }
