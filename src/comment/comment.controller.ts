@@ -6,6 +6,7 @@ import {
   UseGuards,
   Body,
   Delete,
+  Query,
 } from '@nestjs/common';
 
 import { CommentService } from './comment.service';
@@ -23,13 +24,13 @@ export class CommentController {
   }
 
   @Get('idea/:id')
-  showCommentsByIdea(@Param('id') id: string) {
-    return this.commentService.showByIdea(id);
+  showCommentsByIdea(@Param('id') id: string, @Query('page') page?: number) {
+    return this.commentService.showByIdea(id, page);
   }
 
   @Get('user/:id')
-  showCommentsByUser(@Param('id') id: string) {
-    return this.commentService.showByUser(id);
+  showCommentsByUser(@Param('id') id: string, @Query('page') page?: number) {
+    return this.commentService.showByUser(id, page);
   }
 
   @Post('idea/:id')

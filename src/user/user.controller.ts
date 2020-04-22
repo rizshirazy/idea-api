@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Logger, Body } from '@nestjs/common';
+import { Controller, Post, Get, Logger, Body, Query } from '@nestjs/common';
 
 import { UserService } from './user.service';
 import { UserDTO } from './user.dto';
@@ -9,8 +9,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('api/users')
-  fetchAllUsers() {
-    return this.userService.showAll();
+  fetchAllUsers(@Query('page') page?: number) {
+    return this.userService.showAll(page);
   }
 
   @Post('/login')

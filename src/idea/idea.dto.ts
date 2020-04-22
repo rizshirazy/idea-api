@@ -10,7 +10,6 @@ export class IdeaDTO {
 
   @IsString()
   @IsNotEmpty()
-  @Length(10, 200)
   readonly description: string;
 }
 
