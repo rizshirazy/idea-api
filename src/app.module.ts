@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 
 import { AppController } from './app.controller';
@@ -24,6 +25,7 @@ import { CommentModule } from './comment/comment.module';
       logging: ['error'],
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
+    GraphQLModule.forRoot({ typePaths: ['./**/*.graphql'] }),
     IdeaModule,
     UserModule,
     CommentModule,
