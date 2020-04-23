@@ -25,7 +25,10 @@ import { CommentModule } from './comment/comment.module';
       logging: ['error'],
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
-    GraphQLModule.forRoot({ typePaths: ['./**/*.graphql'] }),
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
+      context: ({ req }) => ({ headers: req.headers }),
+    }),
     IdeaModule,
     UserModule,
     CommentModule,
