@@ -1,5 +1,5 @@
 type User {
-  id: String!
+  id: ID
   username: String!
   created: String!
   bookmarks: [Idea!]
@@ -15,7 +15,7 @@ type Auth {
 type Query {
   users(page: Int): [User!]
   user(username: String!): User
-  whoami: User
+  whoami: User!
 }
 
 type Mutation {
